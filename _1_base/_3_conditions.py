@@ -25,3 +25,34 @@ elif fruit == 'banana':
     print('OKay, you wont die today')
 else:
     print('What is that?')
+
+# [] - False, [''] - True, '' - False, 1 - True, 0 - False
+
+# TODO условный оператор math-case
+
+light = 'green'
+
+match light:
+    case 'red':
+        print('Stop')
+    case 'yellow':
+        print('Proceed with caution')
+    case 'green':
+        print('Go')
+
+
+# TODO тернарный оператор
+
+a = 10
+b = 20
+
+res = ''
+if a > b:
+    res = 'True'
+else:
+    res = 'False'
+
+print(res)
+
+res2 = 'True' if a > b else 'False'
+print(res2)

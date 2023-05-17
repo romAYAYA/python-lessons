@@ -12,3 +12,15 @@ if val4:
     print('its okay')
 else:
     print('its not okay')
+
+cond1 = 12 <= 5
+cond2 = 12 == 12
+cond3 = 12 < 7
+
+if (cond1 and cond2) or cond3:
+    print('True 4')
+else:
+    print('False 4')
+
+
+
