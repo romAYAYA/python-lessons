@@ -72,8 +72,30 @@ b = [1, 2, 3]
 print(a is b)  # False
 
 # Example 3
+
 c = "hello"
 d = "hello"
 
 # In Python, string literals with the same value refer to the same object
 print(c is d)  # True
+
+# TODO стандартные функции
+
+print(sum([1, 2, 3, 4]))
+
+print(round(2.424242, 2))
+
+print(int(2.0))
+
+print(type(True))
+
+print(abs(-100)) # модуль числа
+
+print(len('Hello'))
+
+print(any([False, False, False, False])) # False
+print(any([False, True, False, False])) # True
+
+print(all([True, True, True, True]))
+print(all([False, False, False, False]))
+print(all([False, True, False, False]))
