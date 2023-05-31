@@ -1,3 +1,6 @@
+import utils
+
+
 def sort(a, b, c):
     tuple_a = (a, sum(a))
     tuple_b = (b, sum(b))
@@ -13,3 +16,7 @@ b = [3, 4, 5]
 c = [1, 2, 3]
 
 print(sort(a, b, c))
+
+res1 = utils.get_sum(1, 3)
+
+print(res1)

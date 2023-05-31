@@ -1,3 +1,6 @@
+from functools import partial
+
+
 # TODO функции
 
 # def - define - определить
@@ -229,3 +232,12 @@ def sym1():
 
 
 local_var = 12  # глобальная область видимости
+
+
+def multiply(x, y):
+    return x * y
+
+
+double = partial(multiply, 2)
+result1 = double(5)
+print(result1)
