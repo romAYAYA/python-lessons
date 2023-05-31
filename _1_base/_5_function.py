@@ -105,6 +105,9 @@ def div1(a, b):
 
 div2 = lambda a, b: a / b
 
+elems = [1, 12, 2, 9, 8]
+print(sorted(elems, reverse=False))
+
 people = [
     {'name': 'Alice', 'age': 25},
     {'name': 'Bob', 'age': 30},
@@ -119,7 +122,7 @@ def get_age(person):
 sorted_people = sorted(people, key=get_age)
 print(sorted_people)
 
-sorted_people = sorted(people, key=lambda x: x['age'])
+sorted_people = sorted(people, key=lambda person: person['name'])
 print(sorted_people)
 
 
