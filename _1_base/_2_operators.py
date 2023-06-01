@@ -99,3 +99,16 @@ print(any([False, True, False, False])) # True
 print(all([True, True, True, True]))
 print(all([False, False, False, False]))
 print(all([False, True, False, False]))
+
+# TODO оператор среза
+
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+result = my_list[::2]  # Выбирает каждый второй элемент
+print(result)  # [1, 3, 5, 7, 9]
+
+result = my_list[1::2]  # Выбирает каждый второй элемент, начиная со второго
+print(result)  # [2, 4, 6, 8, 10]
+
+result = my_list[1:6:2]  # Выбирает каждый второй элемент, начиная со второго и заканчивая пятым
+print(result)  # [2, 4, 6]
