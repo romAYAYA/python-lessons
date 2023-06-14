@@ -121,3 +121,34 @@ def login(username: str, password: str) -> bool:
 
 print(login('admin@gmail.com', 'qwerty1234'))
 print(login('admin@gmail.com', 'Qwerty!1234'))
+
+print('\n\n\n\n\n\n\n')
+# TODO *args **kwargs
+
+# * - оператор распаковки
+
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+tuple1 = (1, 2, 3, 4)
+tuple2 = tuple1
+tuple3 = (42, *tuple1[1:])
+
+dict1 = {'name': 'Python', 'age': 20}
+
+print('tuple:', tuple2)
+print('tuple:', tuple3)
+
+# list3 = list2
+# list3.extend(list1)
+
+
+list3 = [*list1, *list2]
+
+print(list3)
+print(*list3)
+
+print(*dict1)
+print(dict1.items())
+
+for k, v in dict1.items():
+    print(f'{k}  {v}')
