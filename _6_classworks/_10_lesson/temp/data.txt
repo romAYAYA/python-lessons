@@ -1,0 +1,30 @@
+Start Time: 2023-06-14 19:41:10
+End Time: 2023-06-14 19:41:10
+Arguments: 5, 3
+Result: 8
+-------------------
+Start Time: 2023-06-14 19:41:10
+End Time: 2023-06-14 19:41:10
+Arguments: 10, 2
+Result: 5
+-------------------
+Start Time: 2023-06-14 19:41:10
+End Time: 2023-06-14 19:41:10
+Arguments: 4, 6
+Result: 24
+-------------------
+Start Time: 2023-06-14 19:45:26
+End Time: 2023-06-14 19:45:26
+Arguments: 5, 3
+Result: 8
+-------------------
+Start Time: 2023-06-14 19:45:26
+End Time: 2023-06-14 19:45:26
+Arguments: 10, 2
+Result: 5
+-------------------
+Start Time: 2023-06-14 19:45:26
+End Time: 2023-06-14 19:45:26
+Arguments: 4, 6
+Result: 24
+-------------------

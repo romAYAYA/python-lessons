@@ -1,6 +1,7 @@
 ########################################################################################################################
 # TODO декораторы
 import time
+import re
 
 
 # нужно изменить функцию (значения на входе/выходе, или действия внутри)
@@ -95,3 +96,28 @@ def function_something_write(value: int):
 
 
 print(function_something_write(12))
+
+
+def validate_user_credentials(function: callable) -> callable:
+    def worker(*args, **kwargs):
+        if re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", string=str(args[0])) is None:
+            print('Invalid email address')
+
+        if re.match(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", string=str(args[1])) is None:
+            print('Invalid password')
+
+        res = function(*args, **kwargs)
+        return res
+
+    return worker
+
+
+@validate_user_credentials
+def login(username: str, password: str) -> bool:
+    if username == 'admin@gmail.com' and password == 'Qwerty!1234':
+        return True
+    return False
+
+
+print(login('admin@gmail.com', 'qwerty1234'))
+print(login('admin@gmail.com', 'Qwerty!1234'))
