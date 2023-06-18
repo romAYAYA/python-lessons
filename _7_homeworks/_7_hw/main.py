@@ -1,4 +1,6 @@
 from typing import Set, Union, Dict, Optional, List
+from datetime import datetime, timedelta
+import json
 
 
 # TODO task 1
@@ -153,3 +155,28 @@ from typing import Set, Union, Dict, Optional, List
 #
 #
 # print(set_gen([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]))
+
+# TODO task 8
+
+
+def calculate_hours_left(day1: str, day2: str) -> str:
+    weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+    day1_index = weekdays.index(day1.capitalize())
+    day2_index = weekdays.index(day2.capitalize())
+
+    hours_left = abs(day2_index - day1_index) * 24
+
+    dates = {
+        "Day 1": day1,
+        "Day 2": day2,
+        "Hours left": hours_left
+    }
+
+    with open("temp/dates.json", "w") as file:
+        json.dump(dates, file)
+
+    return f"There are {hours_left} hours left between {day1} and {day2}."
+
+
+print(calculate_hours_left("Monday", "Friday"))
