@@ -2,11 +2,13 @@
 # TODO базы данных
 
 import psycopg2  # PostgreSQL
+import sqlite3
 
 
 # pyodbc - MSSQL / MySQL
 # cx_oracle - Oracle
 # mysqlconnector MySQL....
+# sqlite3 SQLITE
 
 
 # 1. В мире много данных! Даже в рамках одного проекта, данных много!
@@ -40,13 +42,14 @@ import psycopg2  # PostgreSQL
 # 2. Чистый SQL - более гибкий.
 # 3. Проще автоматизировать.
 
-def query(query_str: str) -> list | None:
-    with psycopg2.connect(dbname="market_place", host="localhost", user="postgres", password="31284bogdan",
-                          port="5432") as connection:
+def query(query_str: str, args: tuple, many=True) -> list | None:
+    with psycopg2.connect(dbname="market_place", host="127.0.0.1", user="postgres", password="roma0712", port="5432") as connection:
         with connection.cursor() as cursor:
-            cursor.execute(query_str)
+            cursor.execute(query_str, args)
             try:
-                return cursor.fetchall()
+                if many:
+                    return cursor.fetchall()  # list[tuple[any]]
+                return cursor.fetchone()  # tuple[any]
             except Exception as error:
                 return None
 
@@ -57,8 +60,7 @@ def query_old(query_str: str) -> list | None:
     rows = None
 
     try:
-        connection = psycopg2.connect(dbname="market_place", host="localhost", user="postgres", password="31284bogdan",
-                                      port="5432")
+        connection = psycopg2.connect(dbname="market_place", host="localhost", user="postgres", password="roma0712", port="5432")
         cursor = connection.cursor()
         query_create_table = """
     SELECT id, title FROM public.posts
@@ -72,6 +74,30 @@ def query_old(query_str: str) -> list | None:
         cursor.close()
         connection.close()
         return rows
+
+
+def query_with_injection() -> list | None:
+    text_ = "Нужно помыть кота!;create user natalia with password admin;get all privilegies;"
+    query_str = f"INSERT INTO posts (title) VALUES ('{text_}')"
+    with psycopg2.connect(dbname="market_place", host="127.0.0.1", user="postgres", password="roma0712", port="5432") as connection:
+        with connection.cursor() as cursor:
+            cursor.execute(query_str)
+            try:
+                return cursor.fetchall()
+            except Exception as error:
+                return None
+
+
+def query_without_injection() -> list | None:
+    text_ = "Нужно помыть кота!;create user natalia with password admin;get all privilegies;"
+    query_str = f"INSERT INTO posts (title, decrtiption) VALUES ('%s', '%s')"  # postgres - %s | sqlite - ?
+    with psycopg2.connect(dbname="market_place", host="127.0.0.1", user="postgres", password="31284bogdan", port="5432") as connection:
+        with connection.cursor() as cursor:
+            cursor.execute(query_str, (text_, 123))
+            try:
+                return cursor.fetchall()
+            except Exception as error:
+                return None
 
 
 def queries():
@@ -122,7 +148,6 @@ def queries():
     """
     UPDATE public.products 
     SET count = count + 2 
-
     WHERE description = 'красная';
     """  # обновление выбранных полей по условию
 
@@ -130,5 +155,13 @@ def queries():
 if __name__ == "__main__":
     print(query("SELECT * FROM posts"))
     # print(query("INSERT INTO posts (title) VALUES ('Макароны')"))
+
+    # todo SQL injection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    text = "Нужно помыть кота!;drop table postgres;"
+    text = "Нужно помыть кота!;create user natalia with password admin;get all privilegies;"
+    # text = input("Что вы хотите?")
+    print(query(f"INSERT INTO posts (title) VALUES ('{text}')", (text, )))
+    # todo SQL injection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     # print(query("DELETE FROM posts WHERE title='Салат';"))
     print(query("SELECT * FROM posts"))
