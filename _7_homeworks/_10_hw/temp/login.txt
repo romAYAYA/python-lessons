@@ -1,0 +1,3 @@
+Login: roma123	Password: $2b$12$rmZJa/oB9V75Cod4jKbC4.e7pXxueUpwWDR73VJEC72U219gdWcoe
+Login: anime	Password: $2b$12$CfLhi2OZiqHugVA7kaicMeL6Ul.PgQthq/Z8qpE1GvG7FTy4ojlXi
+Login: asdf	Password: $2b$12$y80M7HLGCDmLNUvRGTZ1ZuJIgm2ND3ZDwE9XfainG8VUkagWyOmBK
