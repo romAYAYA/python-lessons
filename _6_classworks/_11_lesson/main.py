@@ -17,51 +17,41 @@ def performance_decorator(func):
     return wrapper
 
 
-url = 'https://jsonplaceholder.typicode.com/todos/1'
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (HTML, like Gecko) '
-                  'Chrome/102.0.0.0 Safari/537.36'
-}
+def get_single_todo(num: int):
+    with open(f'temp/data{num}.json', mode='w', encoding='utf-8') as file:
+        json.dump(requests.get(f'https://jsonplaceholder.typicode.com/todos/{num}').json(), file)
 
 
-@performance_decorator
-def get_single_todo():
-    res = requests.get(url=url, headers=headers)
-    data = res.json()
-    with open('temp/single_todo.json', mode='w', encoding='utf-8') as file:
-        json.dump(data, file)
+def get_10_todos():
+    for i in range(1, 10 + 1):
+        get_single_todo(i)
 
 
 @performance_decorator
 def threading_get_todos():
     thread_list = []
     for i in range(1, 10 + 1):
-        thread_list.append(threading.Thread(target=get_single_todo(), args=(), kwargs={}))
+        thread_list.append(threading.Thread(target=get_10_todos(), args=(), kwargs={}))
     for thread in thread_list:
         thread.start()
     for thread in thread_list:
         thread.join()
 
 
+@performance_decorator
+def multiprocessing_get_todos():
+    process_list = []
+    for i in range(1, 10 + 1):
+        process_list.append(multiprocessing.Process(target=get_10_todos(), args=(), kwargs={}))
+    for process in process_list:
+        process.start()
+    for process in process_list:
+        process.join()
+
+
 if __name__ == "__main__":
-    get_single_todo()
+    # get_single_todo()
     threading_get_todos()
+    # multiprocessing_get_todos()
 
     pass
-
-# def load_todos():
-#     for _ in range(10):
-#         get_single_todo()
-
-
-# load_todos()
-
-# @performance_decorator
-# def get_todos():
-#     res = requests.get(url='https://jsonplaceholder.typicode.com/todos', headers=headers)
-#     data = res.json()[:10]
-#     with open('temp/todos.json', mode='w', encoding='utf-8') as file:
-#         json.dump(data, file)
-#
-#
-# get_todos()
