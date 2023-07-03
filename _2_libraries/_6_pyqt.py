@@ -36,7 +36,6 @@ datetime TEXT
     query(query_str)
 
 
-
 def insert_db(title: str, status=False, date_time=None) -> None:
     if date_time is None:
         date_time = datetime.datetime.now()

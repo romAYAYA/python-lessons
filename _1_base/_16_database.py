@@ -43,7 +43,7 @@ import sqlite3
 # 3. Проще автоматизировать.
 
 def query(query_str: str, args: tuple, many=True) -> list | None:
-    with psycopg2.connect(dbname="market_place", host="127.0.0.1", user="postgres", password="roma0712", port="5432") as connection:
+    with psycopg2.connect(dbname="market_place", host="localhost", user="postgres", password="roma0712", port="5432") as connection:
         with connection.cursor() as cursor:
             cursor.execute(query_str, args)
             try:
@@ -78,8 +78,8 @@ def query_old(query_str: str) -> list | None:
 
 def query_with_injection() -> list | None:
     text_ = "Нужно помыть кота!;create user natalia with password admin;get all privilegies;"
-    query_str = f"INSERT INTO posts (title) VALUES ('{text_}')"
-    with psycopg2.connect(dbname="market_place", host="127.0.0.1", user="postgres", password="roma0712", port="5432") as connection:
+    query_str = f"INSERT INTO posts (title) VALUES ('{text_}')create table posts(    title int);"
+    with psycopg2.connect(dbname="market_place", host="localhost", user="postgres", password="roma0712", port="5432") as connection:
         with connection.cursor() as cursor:
             cursor.execute(query_str)
             try:
@@ -91,7 +91,7 @@ def query_with_injection() -> list | None:
 def query_without_injection() -> list | None:
     text_ = "Нужно помыть кота!;create user natalia with password admin;get all privilegies;"
     query_str = f"INSERT INTO posts (title, decrtiption) VALUES ('%s', '%s')"  # postgres - %s | sqlite - ?
-    with psycopg2.connect(dbname="market_place", host="127.0.0.1", user="postgres", password="31284bogdan", port="5432") as connection:
+    with psycopg2.connect(dbname="market_place", host="localhost", user="postgres", password="roma0712", port="5432") as connection:
         with connection.cursor() as cursor:
             cursor.execute(query_str, (text_, 123))
             try:
