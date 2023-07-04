@@ -1,0 +1,5 @@
+Milk, 2, True
+Bread, 1, True
+Oil, 4, False
+Apple, 5, True
+Anime, 45, True
