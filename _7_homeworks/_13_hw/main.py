@@ -1,7 +1,7 @@
 import sys
 
 import openpyxl
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QMessageBox
+from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QMessageBox
 import sqlite3
 from openpyxl import Workbook
 
