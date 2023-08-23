@@ -1,4 +1,6 @@
 import tkinter as tk
+
+
 # import json
 # import os
 #
@@ -37,39 +39,59 @@ import tkinter as tk
 # app.mainloop()
 
 
+def decorator_val_to_float(func):
+    def wrapper(*args, **kwargs):
+        try:
+            result = func(*args, **kwargs)
+            result = float(result)
+
+        except Exception as err:
+            return err
+
+        return result
+
+    return wrapper
 
 
+@decorator_val_to_float
+def func1(a, b):
+    return f"{a}{b}"
 
 
+@decorator_val_to_float
+def func2(a):
+    return a ** 2
 
 
+@decorator_val_to_float
+def func3(a):
+    return a / 2
 
 
+@decorator_val_to_float
+def func4(a):
+    return a / '2'
 
 
+res1 = func1(1, 2)
+print(type(res1), res1)
 
+res2 = func2(2)
+print(type(res2), res2)
 
+res3 = func3(1)
+print(type(res3), res3)
 
+res4 = func4(1)
+print(type(res4), res4)
 
+arr = [1, 2, 3, 4, 5]
 
+print(*arr)
 
+arr2 = [*arr]
 
+arr2.append(7)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print(arr2)
+print(arr)
